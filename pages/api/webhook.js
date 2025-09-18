@@ -1,31 +1,27 @@
 import { buffer } from "micro";
 import * as admin from "firebase-admin";
 
+// Firebase service account
 const serviceAccount = {
   type: "service_account",
   project_id: "Jayfootwear-68c74",
-  private_key_id: "c488eca553c6d0096e5872067aff467e1bb55b2b",
-  private_key: process.env.NEXT_PUBLIC_FIREBASE_SECRET,
-  client_email:
-    "",
-  client_id: "",
-  auth_uri: "",
-  token_uri: "",
-  auth_provider_x509_cert_url: "",
-  client_x509_cert_url:
-    "",
+  private_key: process.env.NEXT_PUBLIC_FIREBASE_SECRET.replace(/\\n/g, "\n"), // Ensure newlines are correct
+  client_email: process.env.FIREBASE_CLIENT_EMAIL,
+  token_uri: "https://oauth2.googleapis.com/token",
 };
 
+// Initialize Firebase app once
 const app = !admin.apps.length
   ? admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
     })
   : admin.app();
 
+// Stripe
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
 const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
+// Function to fulfill order in Firestore
 const fulfillOrder = async (session) => {
   return app
     .firestore()
@@ -34,34 +30,46 @@ const fulfillOrder = async (session) => {
     .collection("orders")
     .doc(session.id)
     .set({
-      amount: (session.amount_total / 100) * 10000,
-      amount_shipping: (session.total_details.amount_shipping / 100) * 10000,
+      amount: session.amount_total,
+      amount_shipping: session.total_details.amount_shipping,
       images: JSON.parse(session.metadata.images),
       timestamp: admin.firestore.FieldValue.serverTimestamp(),
     })
-    .then(console.log(`Order Success ${session.id}`));
+    .then(() => console.log(`✅ Order recorded: ${session.id}`));
 };
+
+// Webhook handler
 export default async (req, res) => {
   if (req.method === "POST") {
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
     const sig = req.headers["stripe-signature"];
     let event;
+
     try {
       event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
     } catch (err) {
-      console.log("error");
-      return res.status(400).send("error");
+      console.error("❌ Webhook Error:", err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
     }
+
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
       return fulfillOrder(session)
-        .then(() => res.status(200))
-        .catch((err) => res.status(400).send("webhook error" + err.message));
+        .then(() => res.status(200).end())
+        .catch((err) =>
+          res.status(400).send(`Webhook fulfillment error: ${err.message}`)
+        );
     }
+
+    res.status(200).end();
+  } else {
+    res.setHeader("Allow", "POST");
+    res.status(405).end("Method Not Allowed");
   }
 };
 
+// Required for Stripe webhooks in Next.js
 export const config = {
   api: {
     bodyParser: false,
