@@ -51,7 +51,7 @@ function Basket() {
   return (
     <>
       <Head>
-        <title>Jayfootwear | Basket</title>
+        <title>mssofjhgt.shop | Basket</title>
       </Head>
       <div className="w-full min-h-screen relative bg-cusgray pb-10">
         <Header />

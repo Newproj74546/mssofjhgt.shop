@@ -6,7 +6,7 @@ import Header from "../components/header";
 import Head from "next/head";
 
 export default function Home() {
-  const line = "Jayfootwear";
+  const line = "mssofjhgt.shop";
 
   const sentence = {
     animate: {
@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Jayfootwear | Home</title>
+        <title>mssofjhgt.shop | Home</title>
       </Head>
       <div className="w-full h-screen relative">
         <Header />

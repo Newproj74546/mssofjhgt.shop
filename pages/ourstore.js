@@ -6,7 +6,7 @@ function OurStore() {
   return (
     <>
       <Head>
-        <title>Jayfootwear | Store</title>
+        <title>mssofjhgt.shop | Store</title>
       </Head>
       <div className="w-full min-h-screen bg-cusgray ">
         <Header />
@@ -42,10 +42,10 @@ function OurStore() {
               </h1>
               <div className="my-2">
                 <h3 className="mb-1 text-lg font font-semibold">
-                  Jayfootwear Offline Store
+                 mssofjhgt.shop Offline Store
                 </h3>
                 <p className="text-sm">
-                  opic estate, ogun state
+                  california
                 </p>
               </div>
             </div>

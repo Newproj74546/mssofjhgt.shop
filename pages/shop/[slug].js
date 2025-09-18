@@ -66,7 +66,7 @@ function Category({ data, dataItems, dataTypes }) {
   return (
     <>
       <Head>
-        <title>wefootwear | Shop</title>
+        <title>mssofjhgt.shop | Shop</title>
       </Head>
       <Layout categories={data} setSort={setSort} types={dataTypes}>
         {data_items.length > 0 ? (

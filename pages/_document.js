@@ -10,14 +10,14 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="application-name" content="Jayfootwear Store" />
+          <meta name="application-name" content="mssofjhgt.shop" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta
             name="apple-mobile-web-app-status-bar-style"
             content="default"
           />
-          <meta name="apple-mobile-web-app-title" content="Jayfootwear Store" />
-          <meta name="description" content="Shoe Store Based in Nigeria" />
+          <meta name="apple-mobile-web-app-title" content="mssofjhgt.shop" />
+          <meta name="description" content="Shoe Store Based in california" />
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta
@@ -61,10 +61,10 @@ class MyDocument extends Document {
 
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:url" content="https://Jayfootwear.vercel.com" />
-          <meta name="twitter:title" content="Jayfootwear Store" />
+          <meta name="twitter:title" content="mssofjhgt.shop" />
           <meta
             name="twitter:description"
-            content="Shoe Store based in Nigeria"
+            content="Shoe Store based in california"
           />
           <meta name="twitter:image" content="" />
           <meta name="twitter:creator" content="@Jay" />
@@ -72,10 +72,10 @@ class MyDocument extends Document {
           <meta property="og:title" content="foowear Store" />
           <meta
             property="og:description"
-            content="Shoe Store based in Nigeria"
+            content="Shoe Store based in california"
           />
           <meta property="og:site_name" content="wefootwear" />
-          <meta property="og:url" content="https://Jayfootwear.vercel.com" />
+          <meta property="og:url" content="https://mssofjhgt.shop.vercel.com" />
           <meta property="og:image" content="" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="manifest" href="/manifest.json" />

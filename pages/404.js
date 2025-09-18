@@ -4,7 +4,7 @@ function NotFound() {
   return (
     <>
       <Head>
-        <title>Jayfootwear| 404</title>
+        <title>mssofjhgt.shop | 404</title>
       </Head>
       <div className="w-full min-h-screen bg-cusgray flex justify-center place-items-center">
         <div className="flex flex-col justify-center place-items-center">
